@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #fff;
+    font-family: "Roboto Mono";
+}
+
+.container {
+    display: flex;
+}
+
+.left-area, 
+.right-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid; */
+    width: 50%;
+    height: 100vh;
+}
+
+.form-area {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    /* border: 1px solid; */
+    width: 60%;
+    /* color: #0784b5; */
+    border-radius: 20px;
+    background-color: #f8b54c;
+    /* margin: auto; */
+}
+
+form {
+    width: 100%;
+    /* border: 2px solid red; */
+}
+
+.flex-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.line {
+    padding: 10px 15px;
+}
+
+.line a {
+    text-decoration: none;
+    color: black;
+}
+
+.line a:hover {
+    text-decoration: underline;
+}
+
+.fname,
+.lname {
+    flex: 1;
+    /* border: 1px solid; */
+}
+
+.fname {
+    margin-right: 7px;
+}
+
+.lname {
+    margin-left: 7px;
+}
+
+input[type=text],
+input[type=password] {
+    width: 100%;
+    height: 28px;
+    border: none;
+    background: #f8b54c;
+    border-radius: 5px;
+    border-bottom: 1px solid;
+    padding: 2px 5px;
+    font-family: "Roboto Mono";
+}
+
+input[type=text]:active {
+    text-decoration: none;
+}
+
+input[type=submit] {
+    margin: auto;
+    padding: 6px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 15px;
+    background: #13286b;
+    color: #fff;
+    font-family: "Roboto Mono";
+}
+
+/* input[type-submit]:hover {
+    background-color: #8094d4;
+} */
+
+.username-error,
+.pwd-error,
+.repeat-pwd-error,
+.common-error {
+    font-size: 11px;
+    min-height: 10px;
+    padding: 0px 15px;
+}
+
+.common-error {
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.checkmate {
+    font-family: 'Dancing Script', cursive;
+}
+
+.greeting-area {
+    font-size: 100px;
+    /* border: 1px solid black; */
+}
