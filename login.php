@@ -64,7 +64,7 @@
     <div class="container">
         <div class="left-area">
             <div class="greeting-area">
-                Welcome to <br>
+                Welcome back to <br>
                 <spanc class="checkmate">CheckMate</span>.
             </div>
         </div>

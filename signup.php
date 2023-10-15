@@ -65,7 +65,8 @@
         <div class="left-area">
             <div class="greeting-area">
                 Welcome to <br>
-                <spanc class="checkmate">CheckMate</span>.
+                <span class="checkmate">CheckMate</span>. <br>
+                Your ultimate productivity assistant.
             </div>
         </div>
         <div class="right-area">
