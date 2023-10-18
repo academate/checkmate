@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Signup</title>
+    <title>Login</title>
     <link rel="stylesheet" href="signup.css">
     <script defer>
         function callErr(errorNo) {
-            console.log("Call error has been called");
+            // console.log("Call error has been called");
             switch (errorNo) {
-                case 1: usernameErr();
+                case 1: userNotExist();
                         break;
 
                 case 2: pwdErr();
@@ -25,9 +25,9 @@
             errorMsgArea.innerHTML = "Some error occured. Please try again later."; 
         }   
 
-        function usernameErr() {
-            let usrnamArea = document.getElementsByClassName("username-error")[0];
-            usrnamArea.innerHTML = "Username already taken";
+        function userNotExist() {
+            let commonMsgArea = document.getElementsByClassName("common-error")[0];
+            commonMsgArea.innerHTML = "User doesn't exist";
         }
 
         function usernameMistake() {
@@ -43,22 +43,30 @@
         function loginSuccess() {
             window.location.replace("index.html");
         }
+
+        function checkPwdFun(thePwd) {
+            let enteredPwd = document.getElementsByName("pass_one")[0].value;
+            // console.log(enteredPwd);
+
+            if (enteredPwd == thePwd) {
+                loginSuccess();
+            } else {
+                let pwdArea = document.getElementsByClassName("pwd-error")[0];
+                pwdArea.innerHTML = "Entered password is wrong";
+            }
+        }
     </script>
 </head>
 <body>
     <?php
-        if (isset($_POST["sign_up"])) {
-            $fname = $_POST["f_name"]; 
-            $lname = $_POST["l_name"];
+        $username = $passone = "";
+        if (isset($_POST["login"])) {
+            // $fname = $_POST["f_name"]; 
+            // $lname = $_POST["l_name"];
             $username = $_POST["username"];
             $passone = $_POST["pass_one"];
-            $passtwo = $_POST["pass_two"];
-        } else {
-            $fname = $lname = $username = $passone = $passtwo = "";
+            // $passtwo = $_POST["pass_two"];
         }
-
-
-        // $lname = $username = $passone = $passtwo = "";
     ?>
 
     <div class="container">
@@ -109,52 +117,36 @@
     </div>
 
     <?php
-        echo "It reached inside php";
-        if(isset($_POST["sign_up"])) {
+        // echo "It reached inside php<br>";
+
+        if(isset($_POST["login"])) {
             include "connect.php";
             // include "calling_js_fun.php";
 
             //username checking
             $username_query = "select * from user_details where username='$username'";
             $username_res = mysqli_query($con, $username_query); //result is an associative array
-            
+
+            // echo "<br><br>" . var_dump($username_res) . "<br><br>";
+
             try {
                 $row = mysqli_fetch_assoc($username_res);
-                if ($row != NULL) {
-                    if ($row["username"] != NULL) {
-                        die("<script>callErr(1);</script>");
-                    }
+                echo "Row: " . var_dump($row);
+                if ($row == NULL) {
+                    die("<script>callErr(1);</script>");
+                } else {
+                    $original_pwd = $row["password"];
+
+                    echo "<script>checkPwdFun('$original_pwd');</script>";
                 }
                 
             } catch (Exception $e) {}
 
             //password checking
-            if ($passone != $passtwo) {
-                die("<script>callErr(2);</script>");
-            }
-
-            die("<script>loginSuccess();</script>");
-
-            /* Write code for username mistake function */
-
-            // call_tech_err(3);
-
-            // echo "<script>callErr(3);</script>";
+            // if ($passone != $passtwo) {
+            //     die("<script>callErr(2);</script>");
+            // }
         }
     ?>
-
-    
-
-    <!-- <script>
-        let signupBtn = document.getElementById("signupBtn");
-
-        signupBtn.addEventListener("submit", e => {
-            e.preventDefault();
-        });
-    </script> -->
-
-    
-
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </body>
 </html>

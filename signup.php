@@ -154,13 +154,16 @@
                 die("<script>callErr(2);</script>");
             }
 
-            die("<script>loginSuccess();</script>");
+            $adding_user_query = "insert into user_details values('$fname', '$lname', '$username', '$passone')";
+            $adding_user_success = mysqli_query($con, $adding_user_query);
+
+            if ($adding_user_success) {
+                die("<script>loginSuccess();</script>");
+            } else {
+                echo "<script>callErr(3)</script>";
+            }
 
             /* Write code for username mistake function */
-
-            // call_tech_err(3);
-
-            // echo "<script>callErr(3);</script>";
         }
     ?>
 
