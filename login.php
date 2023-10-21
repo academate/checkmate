@@ -41,7 +41,12 @@
         }
 
         function loginSuccess() {
-            window.location.replace("index.html");
+            let commonMsgArea = document.getElementsByClassName("common-error")[0];
+            commonMsgArea.innerHTML = "Login Successful!!";
+
+            setTimeout(() => {
+                window.location.replace("index.html");
+            }, 1400);
         }
 
         function checkPwdFun(thePwd) {

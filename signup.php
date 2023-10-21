@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="signup.css">
     <script defer>
         function callErr(errorNo) {
-            console.log("Call error has been called");
+            console.log("Call error has been called with " + errorNo);
             switch (errorNo) {
                 case 1: usernameErr();
                         break;
@@ -17,12 +17,14 @@
 
                 case 3: techErr();
                         break;
+
+                case 4: usernameMistake();
             }
         }
 
         function techErr() {
             let errorMsgArea = document.getElementsByClassName("common-error")[0];
-            errorMsgArea.innerHTML = "Some error occured. Please try again later."; 
+            errorMsgArea.innerHTML = "Some error occured. Please try again later"; 
         }   
 
         function usernameErr() {
@@ -41,23 +43,26 @@
         }
 
         function loginSuccess() {
-            window.location.replace("index.html");
+            let errorMsgArea = document.getElementsByClassName("common-error")[0];
+            errorMsgArea.innerHTML = "Registration Successful";
+            
+            setTimeout(() => {
+                window.location.replace("index.html");
+            }, 1500);
         }
     </script>
 </head>
 <body>
     <?php
+        $fname = $lname = $username = $passone = $passtwo = "";
+
         if (isset($_POST["sign_up"])) {
             $fname = $_POST["f_name"]; 
             $lname = $_POST["l_name"];
             $username = $_POST["username"];
             $passone = $_POST["pass_one"];
             $passtwo = $_POST["pass_two"];
-        } else {
-            $fname = $lname = $username = $passone = $passtwo = "";
         }
-
-
         // $lname = $username = $passone = $passtwo = "";
     ?>
 
@@ -131,9 +136,21 @@
 
     <?php
         echo "It reached inside php";
+
         if(isset($_POST["sign_up"])) {
             include "connect.php";
             // include "calling_js_fun.php";
+
+            //usernmae mistake checking
+            $contains_dollar = str_contains($username, "$");
+            $contains_hiphen = str_contains($username, "-");
+            $contains_dot = str_contains($username, ".");
+
+            if ($contains_dollar || $contains_dot || $contains_hiphen) {
+                echo "<script>console.log('It has reached here');</script>";
+                die("<script>callErr(4);</script>");
+            }
+
 
             //username checking
             $username_query = "select * from user_details where username='$username'";
@@ -149,11 +166,14 @@
                 
             } catch (Exception $e) {}
 
+
             //password checking
             if ($passone != $passtwo) {
                 die("<script>callErr(2);</script>");
             }
 
+
+            //creating account for the user
             $adding_user_query = "insert into user_details values('$fname', '$lname', '$username', '$passone')";
             $adding_user_success = mysqli_query($con, $adding_user_query);
 
