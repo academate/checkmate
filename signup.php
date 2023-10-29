@@ -47,7 +47,7 @@
             errorMsgArea.innerHTML = "Registration Successful";
             
             setTimeout(() => {
-                window.location.replace("index.html");
+                window.location.replace("index.php");
             }, 1500);
         }
     </script>

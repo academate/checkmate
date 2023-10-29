@@ -45,7 +45,7 @@
             commonMsgArea.innerHTML = "Login Successful!!";
 
             setTimeout(() => {
-                window.location.replace("index.html");
+                window.location.replace("index.php");
             }, 1400);
         }
 
