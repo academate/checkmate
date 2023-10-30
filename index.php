@@ -65,6 +65,14 @@
             border-radius: 15px;
         }
 
+        #adding-list {
+            border: 1px solid;
+            height: 100%;
+            width: 100%;
+            display: grid;
+            place-items: center;
+        }
+
         #nav-section {
             /* margin-bottom: 10px;
             margin-right: 10px; */
@@ -90,7 +98,13 @@
             dfdfd
         </div>
         <div id="right-area">
-            dfdf
+            <div id="adding-list">
+                <form action="" method="post">
+                    Item: <br>
+                    <input type="text" name="" id="" placeholder="Ex: Team meeting at 20:00"> <br>
+                    <input type="button" value="Add Item" onclick="addItem();">
+                </form>
+            </div>
         </div>
     </section>
     <div id="nav-section">
@@ -106,5 +120,12 @@
         </a>
         <!-- <a href="" class="">Contact</a> -->
     </div>
+
+    <script>
+        const addItem = () => {
+            static itemCount = 1;
+            
+        }
+    </script>
 </body>
 </html>
