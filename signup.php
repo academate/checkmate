@@ -42,12 +42,12 @@
             pwdArea.innerHTML = "The two passwords do not match";
         }
 
-        function loginSuccess() {
+        function loginSuccess(userName) {
             let errorMsgArea = document.getElementsByClassName("common-error")[0];
             errorMsgArea.innerHTML = "Registration Successful";
             
             setTimeout(() => {
-                window.location.replace("index.php");
+                window.location.replace("index.php?id='" + userName + "'");
             }, 1500);
         }
     </script>
@@ -178,7 +178,7 @@
             $adding_user_success = mysqli_query($con, $adding_user_query);
 
             if ($adding_user_success) {
-                die("<script>loginSuccess();</script>");
+                die("<script>loginSuccess('$username');</script>");
             } else {
                 echo "<script>callErr(3)</script>";
             }

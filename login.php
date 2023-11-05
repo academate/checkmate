@@ -40,21 +40,21 @@
             pwdArea.innerHTML = "The two passwords do not match";
         }
 
-        function loginSuccess() {
+        function loginSuccess(userName) {
             let commonMsgArea = document.getElementsByClassName("common-error")[0];
             commonMsgArea.innerHTML = "Login Successful!!";
 
             setTimeout(() => {
-                window.location.replace("index.php");
+                window.location.replace("index.php?id='" + userName + "'");
             }, 1400);
         }
 
-        function checkPwdFun(thePwd) {
+        function checkPwdFun(thePwd, userName) {
             let enteredPwd = document.getElementsByName("pass_one")[0].value;
             // console.log(enteredPwd);
 
             if (enteredPwd == thePwd) {
-                loginSuccess();
+                loginSuccess(userName);
             } else {
                 let pwdArea = document.getElementsByClassName("pwd-error")[0];
                 pwdArea.innerHTML = "Entered password is wrong";
@@ -142,7 +142,7 @@
                 } else {
                     $original_pwd = $row["password"];
 
-                    echo "<script>checkPwdFun('$original_pwd');</script>";
+                    echo "<script>checkPwdFun('$original_pwd', '$username');</script>";
                 }
                 
             } catch (Exception $e) {}

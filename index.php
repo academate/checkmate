@@ -4,6 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <script>
+        const inputTasksToScreen = (theContent, idOfColumn) => {
+            console.log("inside input tasks function");
+            console.log("COlumn id = " + idOfColumn);
+            console.log("\n\nThe content = " + theContent);
+            let columnId = document.getElementById(idOfColumn);
+
+            // alert("inputTasksToScreen has been called with " + theContent);
+
+            columnId.innerHTML += theContent + "<br>";
+        }
+    </script>
     <!-- <link rel="stylesheet" href="style.css"> -->
 
     <style>
@@ -47,7 +59,7 @@
 
         #column-two,
         #column-one {
-            border-right: 5px solid;
+            border-right: 5px solid;  
         }
 
         /* #left-area {
@@ -116,6 +128,11 @@
             font-family: "Roboto Mono";
         }
 
+        .radio-btn-grp {
+            display: flex;
+            justify-content: space-between;
+        }
+
         #add-task-submit-btn {
             width: 100%;
             height: 30px;  
@@ -144,45 +161,78 @@
     <section id="main-content-area">
         <div id="left-area">
             <div id="column-one">
-                Blah
+                Nothing added yet
             </div>
             <div id="column-two">
-                Blah
+                Nothing added yet
             </div>
             <div id="column-three">
-                Blah
+                Nothing added yet
             </div>
         </div>
         <div id="right-area">
+            <?php
+            $user = $_REQUEST["id"];
+            $user = trim($user, "'");
+            $dir = "users/" . $user;
+
+            include("insert_into_file.php");
+
+            //creating a folder for the user if it doesn't exits
+            if (!file_exists("users/" . $user)) {
+                mkdir($dir);
+                file_put_contents($dir . "/col1.txt", "");
+                file_put_contents($dir . "/col2.txt", "");
+                file_put_contents($dir . "/col3.txt", "");
+                load_the_list();
+            } else {
+                echo "Directory already exists";
+                load_the_list();
+            }
+
+            ?>
             <div id="adding-list">
                 <form action="" method="post" id="right-side-form">
                     Task: <br>
-                    <input type="text" name="" id="" placeholder="Ex: Team meeting at 20:00"> <br>
-                    <input type="button" value="Add Task" onclick="addItem();" id="task1" style="margin-top: 10px;">
+                    <input type="text" name="taskOne" id="taskOne" placeholder="Ex: Team meeting at 20:00" style="margin-bottom: 15px;" value="<?php echo $taskOne; ?>" required> <br>
+
+                    <input type="text" name="taskTwo" id="taskTwo" placeholder="Ex: Meet boss for dinner" value="<?php echo $taskTwo; ?>">
+                    <!-- <input type="button" value="Add Task" onclick="addItem();" id="task1" style="margin-top: 10px;"> -->
                     <br><br>
                     Heading (optional): <br>
-                    <input type="text" name="heading" placeholder="Ex: Business"> <br><br>
+                    <input type="text" name="opHeading" id="heading" placeholder="Ex: Business" value="<?php echo $optionalHeading; ?>"> <br><br>
                     Add to column: <br>
 
+                    <div class="radio-btn-grp">
                     <label for="col1">
-                        <input type="radio" name="cols" id="col1"> Column 1
+                        <input type="radio" name="cols" id="col1" value="col1"> Left
                     </label>
 
                     <label for="col2">
-                        <input type="radio" name="cols" id="col2"> Column 2
+                        <input type="radio" name="cols" id="col2" value="col2" checked> Middle
                     </label>
 
                     <label for="col3">
-                        <input type="radio" name="cols" id="col3"> Column 3
+                        <input type="radio" name="cols" id="col3" value="col3"> Right
                     </label> 
+                    </div>
 
-                    <br><br>
+                    <br>
 
-                    <input type="submit" value="Add" name="add_tasks" id="add-task-submit-btn">
+                    <input type="submit" value="Add" name="add_tasks" id="add-task-submit-btn" > <!-- onclick="addItem();" -->
+
+                    <!-- <br> -->
+
+                    <!-- <div id="err-msg-area"></div> -->
                 </form>
             </div>
         </div>
     </section>
+
+    <?php
+    
+
+    ?>
     <div id="nav-section">
         <!-- <a href="" class="">Home</a> -->
         <a href="#" class="nav-links">
@@ -197,10 +247,73 @@
         <!-- <a href="" class="">Contact</a> -->
     </div>
 
+    <?php
+        
+    ?>
+
     <script>
         const addItem = () => {
-            static itemCount = 1;
+            // document.getElementById("add-task-submit-btn").addEventListener("click", (event) => {
+            //     event.preventDefault();
+            // });
+
+            console.log("Reached here");
+            let taskOne = document.getElementById("taskOne");
+
+            let taskTwo = document.getElementById("taskTwo");
+
+            let optionalHeading = document.getElementById("heading");
             
+            let leftRdBtn = document.getElementById("col1");
+            let middleRdBtn = document.getElementById("col2");
+            let rightRdBtn = document.getElementById("col3");
+
+            console.log(taskOne.value + "\n" + taskTwo.value + "\n" + optionalHeading.value + "\n");
+
+            // let errMsgArea = document.getElementById("err-msg-area");
+
+            if (taskOne.value == "") {
+                // console.log("HMMM");
+                alert("Please enter at least one task before submitting");
+            } 
+            else {
+                // errMsgArea.innerHTML = "";
+
+                let radioChecked = "default";
+
+                if (leftRdBtn.checked) {
+                    console.log("Left is checked");
+                    leftRdBtn.checked = false;
+                    radioChecked = "left";
+                }
+
+                if (middleRdBtn.checked) {
+                    console.log("Middle is checked");
+                    middleRdBtn.checked = false;
+                    radioChecked = "middle";
+                }
+
+                if (rightRdBtn.checked) {
+                    console.log("Right is checked");
+                    rightRdBtn.checked = false;
+                    radioChecked = "right";
+                }
+
+                let funCalled = "<?php echo insert_into_file('true', ); ?>";
+
+                taskOne.value = "";
+
+                if (taskTwo.value != "") {
+                    taskTwo.value = "";
+                }
+
+                optionalHeading.value = "";
+
+                console.log(funCalled);
+            }
+
+            //making everything empty
+            // taskOne.value = "";
         }
     </script>
 </body>
