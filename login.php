@@ -6,6 +6,11 @@
     <title>Login</title>
     <link rel="stylesheet" href="signup.css">
     <script defer>
+        window.history.forward(); 
+        function noBack() { 
+            window.history.forward(); 
+        }
+        
         function callErr(errorNo) {
             // console.log("Call error has been called");
             switch (errorNo) {

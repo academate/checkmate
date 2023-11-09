@@ -1,7 +1,16 @@
-<h4 class='to-do-list-heading'>fdfdf</h4>
-<input type='checkbox'>Yolo
-<input type='checkbox'>Left one works?
-<input type='checkbox'>Yolo
-<input type='checkbox'>Yolo
-<input type='checkbox'>Yolo
-<input type='checkbox'>Yolo
+heading: Heading checking
+item: Checking
+item: Checking 2.0
+heading: Freedom
+item: Left one works?
+item: Are you sure?
+heading: Freedom
+item: Left one works?
+item: Are you sure?
+heading: Freedom
+item: Left one works?
+item: Are you sure?
+heading: Freedom
+item: Left one works?
+item: Are you sure?
+item: Done

@@ -5,15 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <script>
-        const inputTasksToScreen = (theContent, idOfColumn) => {
-            console.log("inside input tasks function");
-            console.log("COlumn id = " + idOfColumn);
-            console.log("\n\nThe content = " + theContent);
+        window.history.forward(); 
+        function noBack() { 
+            window.history.forward(); 
+        }
+
+        //function to input heading to screen
+        const inputHeadingToScreen = (theHeading, idOfColumn, prevHeadingExists) => {
             let columnId = document.getElementById(idOfColumn);
 
-            // alert("inputTasksToScreen has been called with " + theContent);
+            // if (prevHeadingExists == 1) {
+            //     columnId.innerHTML += "<div class='list-groups'><h4 class='to-do-list-heading'>" + theHeading + "</h4>";
+            //     columnId.innerHTML += "<div class='heading-underline'></div>";
+            // } else {
+            //     columnId.innerHTML += "</div><div class='list-groups'><h4 class='to-do-list-heading'>" + theHeading + "</h4>";
+            //     columnId.innerHTML += "<div class='heading-underline'></div>";
+            // }
 
-            columnId.innerHTML += theContent + "<br>";
+            //chaning this below thing:-------------------- revert back here if any error
+
+            // columnId.innerHTML += "<div class='list-groups'><h4 class='to-do-list-heading'>" + theHeading + "</h4>";
+            // columnId.innerHTML += "<div class='heading-underline'></div>";
+
+            //changing this above thing:------------------------------------------------------------------------
+
+            // if (columnId == "column-one") {
+                
+            // } else if (columnId == "column-two") {
+                
+            // } else {
+
+            // }
+
+            columnId.innerHTML += `<div class='heading-grp'><h4 class='to-do-list-heading'>` + theHeading + `</h4><div class='cross-div' onclick='removeThisListGrp(this);'><span class='cross-bar-one'></span><span class='cross-bar-two'></span></div></div>`;
+            columnId.innerHTML += "<span class='heading-underline'></span>";
+        }
+
+        //function to input list items to the screen
+        const inputListItemsToScreen = (theItem, idOfColumn) => {
+            let columnId = document.getElementById(idOfColumn);
+
+            columnId.innerHTML += "<input type='checkbox' onclick='strikeText(this);'><span>" + theItem + "</span><br>";
+        }
+
+        // const inputTasksToScreen = (theContent, idOfColumn) => {
+        //     // console.log("inside input tasks function");
+        //     // console.log("COlumn id = " + idOfColumn);
+        //     // console.log("\n\nThe content = " + theContent);
+
+        //     let columnId = document.getElementById(idOfColumn);
+
+        //     if (theContent.includes("<h")) {
+        //         console.log("the condition is true");
+        //         columnId.innerHTML += theContent + "<br>";
+        //         columnId.innerHTML += "<div class='heading-underline'></div>";
+        //     } else {
+        //         console.log("the condition is false");
+        //         columnId.innerHTML += theContent + "<br>";
+        //     }
+
+        //     // alert("inputTasksToScreen has been called with " + theContent);
+
+            
+        // }
+
+        // for striking/unstriking the text when the checkbox is checked/unchecked
+        const strikeText = (currentObj) => {
+            let curChBx = currentObj;
+            let textOfNextSibling = curChBx.nextSibling.innerHTML;
+
+            // console.log(textOfNextSibling);
+
+            // console.log(curChBx);
+
+            if (curChBx.checked) {
+                // console.log("Checked");
+                curChBx.nextSibling.innerHTML = "<s>" + textOfNextSibling + "</s>";
+            } else {
+                // console.log("unchecked");
+                curChBx.nextSibling.innerHTML = textOfNextSibling.slice(3, -4);
+            }
+        }
+
+        //this function is for removing a list group (heading + items under it) from the screen
+        const removeThisListGrp = (curElementReference, columnId) => {
+            let st = curElementReference.previousElementSibling.innerHTML;
+
+            console.log("Clicked this element: " + st);
+
+            let theMainEle = curElementReference.parentElement;
+
+            while (true) {
+                let prevEle = theMainEle;
+                
+                try {
+                    theMainEle = theMainEle.nextElementSibling;
+                } catch (err) {
+                    console.log("Exception encountered");
+                }
+
+                prevEle.remove();
+
+                if (theMainEle == null || theMainEle.tagName == "DIV") {
+                    break;
+                }
+            }
+
+            // console.log(columnId);
+
+            // console.log("WIth column id = " + columnId);
         }
     </script>
     <!-- <link rel="stylesheet" href="style.css"> -->
@@ -67,10 +167,57 @@
             margin-bottom: 10px;
         } */
 
+        .heading-grp {
+            position: relative;
+        }
+
+        .cross-div {
+            /* visibility: hidden; */
+            cursor: pointer;
+            /* opacity: 0; */
+            /* scale: 1.05; */
+        }
+
+        .cross-div:hover {
+            /* visibility: visible; */
+            opacity: 1;
+        }
+
+        .cross-bar-one, 
+        .cross-bar-two {
+            background: green;
+            min-width: 15px;
+            height: 2px;
+            display: inline-block;
+            position: absolute;
+            right: 10px;
+            top: 11px;
+        }
+
+        .cross-bar-one {
+            transform: rotate(45deg);
+        }
+
+        .cross-bar-two {
+            transform: rotate(-45deg);
+        }
+
         #right-area {
             width: 25vw;
             border: 1px solid;
             margin-bottom: 10px;
+        }
+
+        .heading-underline {
+            width: 30px;
+            height: 5px;
+            border-radius: 5px;
+            background: red;
+            display: block;
+        }
+
+        input[type=checkbox] {
+            margin-right: 8px;
         }
 
         /* #right-area {
@@ -161,13 +308,13 @@
     <section id="main-content-area">
         <div id="left-area">
             <div id="column-one">
-                Nothing added yet
+                <!-- Nothing added yet -->
             </div>
             <div id="column-two">
-                Nothing added yet
+                <!-- Nothing added yet -->
             </div>
             <div id="column-three">
-                Nothing added yet
+                <!-- Nothing added yet -->
             </div>
         </div>
         <div id="right-area">
@@ -176,7 +323,7 @@
             $user = trim($user, "'");
             $dir = "users/" . $user;
 
-            include("insert_into_file.php");
+            include_once("insert_into_file.php");
 
             //creating a folder for the user if it doesn't exits
             if (!file_exists("users/" . $user)) {
@@ -186,7 +333,7 @@
                 file_put_contents($dir . "/col3.txt", "");
                 load_the_list();
             } else {
-                echo "Directory already exists";
+                // echo "Directory already exists";
                 load_the_list();
             }
 
@@ -252,65 +399,67 @@
     ?>
 
     <script>
+        
+
         const addItem = () => {
             // document.getElementById("add-task-submit-btn").addEventListener("click", (event) => {
             //     event.preventDefault();
             // });
 
-            console.log("Reached here");
-            let taskOne = document.getElementById("taskOne");
+            // console.log("Reached here");
+            // let taskOne = document.getElementById("taskOne");
 
-            let taskTwo = document.getElementById("taskTwo");
+            // let taskTwo = document.getElementById("taskTwo");
 
-            let optionalHeading = document.getElementById("heading");
+            // let optionalHeading = document.getElementById("heading");
             
-            let leftRdBtn = document.getElementById("col1");
-            let middleRdBtn = document.getElementById("col2");
-            let rightRdBtn = document.getElementById("col3");
+            // let leftRdBtn = document.getElementById("col1");
+            // let middleRdBtn = document.getElementById("col2");
+            // let rightRdBtn = document.getElementById("col3");
 
-            console.log(taskOne.value + "\n" + taskTwo.value + "\n" + optionalHeading.value + "\n");
+            // console.log(taskOne.value + "\n" + taskTwo.value + "\n" + optionalHeading.value + "\n");
 
             // let errMsgArea = document.getElementById("err-msg-area");
 
-            if (taskOne.value == "") {
+            // if (taskOne.value == "") {
                 // console.log("HMMM");
-                alert("Please enter at least one task before submitting");
-            } 
-            else {
+            //     alert("Please enter at least one task before submitting");
+            // } 
+            // else {
                 // errMsgArea.innerHTML = "";
 
-                let radioChecked = "default";
+            //     let radioChecked = "default";
 
-                if (leftRdBtn.checked) {
-                    console.log("Left is checked");
-                    leftRdBtn.checked = false;
-                    radioChecked = "left";
-                }
+            //     if (leftRdBtn.checked) {
+            //         console.log("Left is checked");
+            //         leftRdBtn.checked = false;
+            //         radioChecked = "left";
+            //     }
 
-                if (middleRdBtn.checked) {
-                    console.log("Middle is checked");
-                    middleRdBtn.checked = false;
-                    radioChecked = "middle";
-                }
+            //     if (middleRdBtn.checked) {
+            //         console.log("Middle is checked");
+            //         middleRdBtn.checked = false;
+            //         radioChecked = "middle";
+            //     }
 
-                if (rightRdBtn.checked) {
-                    console.log("Right is checked");
-                    rightRdBtn.checked = false;
-                    radioChecked = "right";
-                }
+            //     if (rightRdBtn.checked) {
+            //         console.log("Right is checked");
+            //         rightRdBtn.checked = false;
+            //         radioChecked = "right";
+            //     }
 
-                let funCalled = "<?php echo insert_into_file('true', ); ?>";
+            //     let funCalled = "<?php echo insert_into_file('true', ); ?>";
 
-                taskOne.value = "";
+            //     taskOne.value = "";
 
-                if (taskTwo.value != "") {
-                    taskTwo.value = "";
-                }
+            //     if (taskTwo.value != "") {
+            //         taskTwo.value = "";
+            //     }
 
-                optionalHeading.value = "";
+            //     optionalHeading.value = "";
 
-                console.log(funCalled);
-            }
+            //     console.log(funCalled);
+            // }
 
             //making everything empty
             // taskOne.value = "";

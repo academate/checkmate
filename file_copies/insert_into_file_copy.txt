@@ -1,3 +1,5 @@
+copy made on 08/11/23 before some major changes to how form data will be written to text files:
+
 <?php
 $col_one_headings = array();
 $col_two_headings = array();
@@ -31,23 +33,17 @@ function load_the_list() {
     //reading the content of each file
     // $left_content = fread($fptr_left, filesize($left));
 
-    $left_read_heading = $middle_read_heading = $right_read_heading = 0;
-
     //reading left_file line by line
     while ($line = fgets($fptr_left)) {
         // echo $line;
         $line = rtrim($line, "\n");
 
         //inserting the headings of column 1 to an array
-        if (str_contains($line, "heading: ")) {
-            // array_push($col_one_headings, substr($line, 31, strlen($line) - 31 - 5));
-            $left_read_heading += 1;
-            echo '<script>inputHeadingToScreen("' . substr($line, 9, strlen($line)) . '", "column-one", ' . $left_read_heading . ');</script>';
-        } else {
-            echo '<script>inputListItemsToScreen("' . substr($line, 6, strlen($line)) . '", "column-one");</script>';
+        if (str_contains($line, "<h")) {
+            array_push($col_one_headings, substr($line, 31, strlen($line) - 31 - 5));
         }
         
-        // echo '<script>inputTasksToScreen("' . $line . '", "column-one");</script>';
+        echo '<script>inputTasksToScreen("' . $line . '", "column-one");</script>';
     }
 
     //reading middle_file line by line
@@ -56,15 +52,11 @@ function load_the_list() {
         $line = rtrim($line, "\n");
 
         //inserting the headings of column 2 to an array
-        if (str_contains($line, "heading: ")) {
-            // array_push($col_two_headings, substr($line, 31, strlen($line) - 31 - 5));
-            $middle_read_heading += 1;
-            echo '<script>inputHeadingToScreen("' . substr($line, 9, strlen($line)) . '", "column-two", ' . $middle_read_heading . ');</script>';
-        } else {
-            echo '<script>inputListItemsToScreen("' . substr($line, 6, strlen($line)) . '", "column-two");</script>';
+        if (str_contains($line, "<h")) {
+            array_push($col_two_headings, substr($line, 31, strlen($line) - 31 - 5));
         }
         
-        // echo '<script>inputTasksToScreen("' . $line . '", "column-two");</script>';
+        echo '<script>inputTasksToScreen("' . $line . '", "column-two");</script>';
     }
 
     //reading right_file line by line
@@ -74,15 +66,11 @@ function load_the_list() {
         $line = rtrim($line, "\n");
 
         //inserting the headings of column 3 to an array
-        if (str_contains($line, "heading: ")) {
-            // array_push($col_one_headings, substr($line, 31, strlen($line) - 31 - 5));
-            $right_read_heading += 1;
-            echo '<script>inputHeadingToScreen("' . substr($line, 9, strlen($line)) . '", "column-three", ' . $right_read_heading . ');</script>';
-        } else {
-            echo '<script>inputListItemsToScreen("' . substr($line, 6, strlen($line)) . '", "column-three");</script>';
+        if (str_contains($line, "<h")) {
+            array_push($col_one_headings, substr($line, 31, strlen($line) - 31 - 5));
         }
         
-        // echo '<script>inputTasksToScreen("' . $line . '", "column-three");</script>';
+        echo '<script>inputTasksToScreen("' . $line . '", "column-three");</script>';
     }
 
     //Making some big changes here ------------------------------------------------------------------------------------------------------------------------------
@@ -150,15 +138,15 @@ function insert_into_file($taskOne, $taskTwo, $optionalHeading, $file_name) {
     //changing this whole part -----------------------------------------------------------------------------------------------
 
     if ($optionalHeading != "") {
-        fwrite($file_ptr, "heading: " . $optionalHeading . "\n");
+        fwrite($file_ptr, "<h4 class='to-do-list-heading'>" . $optionalHeading . "</h4>\n");
     }
 
-    fwrite($file_ptr, "item: " . $taskOne . "\n");
+    fwrite($file_ptr, "<input type='checkbox' onclick='strikeText(this);'><span>" . $taskOne . "</span>\n");
 
     if ($taskTwo != "") {
         // $content += $taskTwo;
         // $content += "<input type='checkbox'>" . $taskTwo . "\n";
-        fwrite($file_ptr, "item: " . $taskTwo . "\n");
+        fwrite($file_ptr, "<input type='checkbox' onclick='strikeText(this);'><span>" . $taskTwo . "</span>\n");
     }
 
     // fwrite($file_ptr, $content); //writing content to the file
