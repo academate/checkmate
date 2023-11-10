@@ -115,6 +115,8 @@
 
             // console.log("WIth column id = " + columnId);
         }
+
+        
     </script>
     <!-- <link rel="stylesheet" href="style.css"> -->
 
@@ -130,6 +132,29 @@
         body {
             padding: 5px;
             font-family: "Roboto Mono";
+        }
+
+        #logout-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1000;
+            /* background: white; */
+            /* opacity: 0.7; */
+            display: grid;
+            place-items: center;
+            visibility: hidden;
+        }
+
+        #logout-box {
+            border: 3px solid;
+            border-radius: 10px;
+            width: 300px;
+            padding: 20px;
+            background: red;
+            opacity: 1;
         }
 
         #main-content-area {
@@ -218,6 +243,7 @@
 
         input[type=checkbox] {
             margin-right: 8px;
+            cursor: pointer;
         }
 
         /* #right-area {
@@ -305,6 +331,13 @@
     </style>
 </head>
 <body>
+    <div id="logout-page">
+        <div id="logout-box">
+            <p>Log out from Checkmate?</p> <br>
+            <input type="button" value="Logout" onclick="logOutConfirmation(true);">
+            <input type="button" value="Cancel" onclick="logOutConfirmation(false);">
+        </div>
+    </div>
     <section id="main-content-area">
         <div id="left-area">
             <div id="column-one">
@@ -391,6 +424,10 @@
         <a href="" class="nav-links">
             <img src="./icons8-about-48.png" alt="">
         </a>
+
+        <!-- <a href="" class="nav-links" onclick="logOutPopUpBox();"> -->
+            <p onclick="logOutPopUpBox();">logout</p>
+        <!-- </a> -->
         <!-- <a href="" class="">Contact</a> -->
     </div>
 
@@ -399,70 +436,22 @@
     ?>
 
     <script>
-        
+        let logoutPage = document.getElementById("logout-page");
 
-        const addItem = () => {
-            // document.getElementById("add-task-submit-btn").addEventListener("click", (event) => {
-            //     event.preventDefault();
-            // });
+        //checking for logout confirmation and doing things accordingly
+        const logOutConfirmation = (boolVal) => {
+            if (boolVal == true) {
+                window.location.replace("login.php");
+            } else {
+                logoutPage.style.visibility = "hidden";
+                logoutPage.style.zIndex = -1000;
+            }
+        }
 
-            // console.log("Reached here");
-            // let taskOne = document.getElementById("taskOne");
-
-            // let taskTwo = document.getElementById("taskTwo");
-
-            // let optionalHeading = document.getElementById("heading");
-            
-            // let leftRdBtn = document.getElementById("col1");
-            // let middleRdBtn = document.getElementById("col2");
-            // let rightRdBtn = document.getElementById("col3");
-
-            // console.log(taskOne.value + "\n" + taskTwo.value + "\n" + optionalHeading.value + "\n");
-
-            // let errMsgArea = document.getElementById("err-msg-area");
-
-            // if (taskOne.value == "") {
-                // console.log("HMMM");
-            //     alert("Please enter at least one task before submitting");
-            // } 
-            // else {
-                // errMsgArea.innerHTML = "";
-
-            //     let radioChecked = "default";
-
-            //     if (leftRdBtn.checked) {
-            //         console.log("Left is checked");
-            //         leftRdBtn.checked = false;
-            //         radioChecked = "left";
-            //     }
-
-            //     if (middleRdBtn.checked) {
-            //         console.log("Middle is checked");
-            //         middleRdBtn.checked = false;
-            //         radioChecked = "middle";
-            //     }
-
-            //     if (rightRdBtn.checked) {
-            //         console.log("Right is checked");
-            //         rightRdBtn.checked = false;
-            //         radioChecked = "right";
-            //     }
-
-            //     let funCalled = "<?php echo insert_into_file('true', ); ?>";
-
-            //     taskOne.value = "";
-
-            //     if (taskTwo.value != "") {
-            //         taskTwo.value = "";
-            //     }
-
-            //     optionalHeading.value = "";
-
-            //     console.log(funCalled);
-            // }
-
-            //making everything empty
-            // taskOne.value = "";
+        //showing logout confirmation box
+        const logOutPopUpBox = () => {
+            logoutPage.style.visibility = "visible";
+            logoutPage.style.zIndex = 1000;
         }
     </script>
 </body>

@@ -95,12 +95,10 @@ function load_the_list() {
         echo $ele . "<br>";
     }
 
-    echo "<br><br>";
     foreach($col_two_headings as $ele) {
         echo $ele . "<br>";
     }
-
-    echo "<br><br>";
+    
     foreach($col_three_headings as $ele) {
         echo $ele . "<br>";
     }
