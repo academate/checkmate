@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
     <script>
         window.history.forward(); 
         function noBack() { 
@@ -11,7 +12,7 @@
         }
 
         //function to input heading to screen
-        const inputHeadingToScreen = (theHeading, idOfColumn, prevHeadingExists) => {
+        const inputHeadingToScreen = (theHeading, idOfColumn) => {
             let columnId = document.getElementById(idOfColumn);
 
             // if (prevHeadingExists == 1) {
@@ -37,8 +38,14 @@
 
             // }
 
-            columnId.innerHTML += `<div class='heading-grp'><h4 class='to-do-list-heading'>` + theHeading + `</h4><div class='cross-div' onclick='removeThisListGrp(this);'><span class='cross-bar-one'></span><span class='cross-bar-two'></span></div></div>`;
+            if (columnId.innerHTML != "") {
+                columnId.innerHTML += "<hr>";
+            }
+
+            columnId.innerHTML += `<div class='heading-grp'><h4 class='to-do-list-heading'>` + theHeading + `</h4><div class='cross-div' id='` + idOfColumn.substring(7) + `'onclick='removeThisListGrp(this);'><span class='cross-bar-one'></span><span class='cross-bar-two'></span></div></div>`;
             columnId.innerHTML += "<span class='heading-underline'></span>";
+
+            // let headingsArray = Array.from
         }
 
         //function to input list items to the screen
@@ -87,249 +94,279 @@
             }
         }
 
-        //this function is for removing a list group (heading + items under it) from the screen
-        const removeThisListGrp = (curElementReference, columnId) => {
-            let st = curElementReference.previousElementSibling.innerHTML;
+        const removeFirstHr = () => {
+            let colOne = document.getElementById("column-one");
+            let colTwo = document.getElementById("column-two");
+            let colThree = document.getElementById("column-three");
 
-            console.log("Clicked this element: " + st);
-
-            let theMainEle = curElementReference.parentElement;
-
-            while (true) {
-                let prevEle = theMainEle;
-                
-                try {
-                    theMainEle = theMainEle.nextElementSibling;
-                } catch (err) {
-                    console.log("Exception encountered");
-                }
-
-                prevEle.remove();
-
-                if (theMainEle == null || theMainEle.tagName == "DIV") {
-                    break;
-                }
-            }
-
-            // console.log(columnId);
-
-            // console.log("WIth column id = " + columnId);
+            colOne.firstElementChild.remove();
+            colTwo.firstElementChild.remove();
+            colThree.firstElementChild.remove();
         }
-
-        
     </script>
     <!-- <link rel="stylesheet" href="style.css"> -->
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
+        /* * {
+    margin: 0;
+}
 
-        * {
-            margin: 0;
-            box-sizing: border-box;
-        }
+#main-content-area {
+    display: flex;
+    justify-content: center;
+    height: 80vh;
+    border: 1px solid;
+}
 
-        body {
-            padding: 5px;
-            font-family: "Roboto Mono";
-        }
+#left-area {
+    width: 70vw;
+    border: 1px solid;
+}
 
-        #logout-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1000;
-            /* background: white; */
-            /* opacity: 0.7; */
-            display: grid;
-            place-items: center;
-            visibility: hidden;
-        }
+#right-area {
+    width: 30vw;
+    border: 1px solid;
+}
 
-        #logout-box {
-            border: 3px solid;
-            border-radius: 10px;
-            width: 300px;
-            padding: 20px;
-            background: red;
-            opacity: 1;
-        }
+nav {
+    border: 1px solid;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
 
-        #main-content-area {
-            display: flex;
-            justify-content: center;
-            height: 90vh;
-            /* margin-bottom: 10px; */
-            /* border: 1px solid; */
-        }
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
 
-        #left-area {
-            width: 75vw;
-            border: 1px solid;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            padding: 25px 5px;
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
 
-            display: flex;
-        }
+body {
+    padding: 5px;
+    font-family: "Roboto Mono";
+}
 
-        #column-one,
-        #column-two,
-        #column-three {
-            flex: 1;
-            padding: 10px 5px;
-        }
+#logout-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1000;
+    /* background: white; */
+    /* opacity: 0.7; */
+    display: grid;
+    place-items: center;
+    visibility: hidden;
+}
 
-        #column-two,
-        #column-one {
-            border-right: 5px solid;  
-        }
+#logout-box {
+    border: 3px solid;
+    border-radius: 10px;
+    width: 300px;
+    padding: 20px;
+    background: red;
+    opacity: 1;
+}
 
-        /* #left-area {
-            margin-right: 10px;
-            margin-bottom: 10px;
-        } */
+#main-content-area {
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    /* margin-bottom: 10px; */
+    /* border: 1px solid; */
+}
 
-        .heading-grp {
-            position: relative;
-        }
+#left-area {
+    width: 75vw;
+    border: 1px solid;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 25px 5px;
+    display: flex;
+}
 
-        .cross-div {
-            /* visibility: hidden; */
-            cursor: pointer;
-            /* opacity: 0; */
-            /* scale: 1.05; */
-        }
+#column-one,
+#column-two,
+#column-three {
+    flex: 1;
+    padding: 10px 15px;
+    overflow: auto;
+}
 
-        .cross-div:hover {
-            /* visibility: visible; */
-            opacity: 1;
-        }
+#column-one::-webkit-scrollbar,
+#column-two::-webkit-scrollbar,
+#column-three::-webkit-scrollbar {
+    display: none;
+}
 
-        .cross-bar-one, 
-        .cross-bar-two {
-            background: green;
-            min-width: 15px;
-            height: 2px;
-            display: inline-block;
-            position: absolute;
-            right: 10px;
-            top: 11px;
-        }
+hr {
+    margin: 10px 0px;
+}
 
-        .cross-bar-one {
-            transform: rotate(45deg);
-        }
+#column-two,
+#column-one {
+    border-right: 5px solid;  
+}
 
-        .cross-bar-two {
-            transform: rotate(-45deg);
-        }
+/* #left-area {
+    margin-right: 10px;
+    margin-bottom: 10px;
+} */
 
-        #right-area {
-            width: 25vw;
-            border: 1px solid;
-            margin-bottom: 10px;
-        }
+.heading-grp {
+    position: relative;
+    padding: 5px;
+    /* border-top: 2px solid;
+    border-right: 2px solid;
+    border-left: 2px solid; */
+    /* border-top-left-radius: 10px;
+    border-top-right-radius: 10px; */
+    margin-top: 10px;
+    /* border: 1px solid; */
+}
 
-        .heading-underline {
-            width: 30px;
-            height: 5px;
-            border-radius: 5px;
-            background: red;
-            display: block;
-        }
+.cross-div {
+    /* visibility: hidden; */
+    cursor: pointer;
+    /* opacity: 0; */
+    /* scale: 1.05; */
+}
 
-        input[type=checkbox] {
-            margin-right: 8px;
-            cursor: pointer;
-        }
+.cross-div:hover {
+    /* visibility: visible; */
+    opacity: 1;
+}
 
-        /* #right-area {
-            margin-bottom: 10px;
-        } */
+.cross-bar-one, 
+.cross-bar-two {
+    background: green;
+    min-width: 18px;
+    height: 2px;
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    border-radius: 15px;
+}
 
-        #nav-section {
-            border: 1px solid;
-            /* position: fixed; */
-            /* bottom: 0; */
-            /* width: calc(100vw - 10px); */
-            width: calc(100vw - 10px);
-            /* height: calc(10vh - 10px); */
-            height: calc(10vh - 15px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.cross-bar-one {
+    transform: rotate(45deg);
+}
 
-        #left-area, 
-        #right-area,
-        #nav-section {
-            border-radius: 15px;
-        }
+.cross-bar-two {
+    transform: rotate(-45deg);
+}
 
-        #adding-list {
-            border: 1px solid;
-            height: 100%;
-            width: 100%;
-            display: grid;
-            place-items: center;
-            padding: 15px;
-        }
+#right-area {
+    width: 25vw;
+    border: 1px solid;
+    margin-bottom: 10px;
+}
 
-        #right-side-form {
-            width: 100%;
-            line-height: 30px;
-            position: relative;
-        }
+.heading-underline {
+    width: 30%;
+    height: 5px;
+    border-radius: 5px;
+    background: red;
+    display: block;
+    /* margin-left: 10px;
+    margin-bottom: 5px; */
+    margin: 0px auto 10px auto;
+}
 
-        #right-side-form input[type=text] {
-            width: 100%;
-            height: 30px;
-            padding: 3px 5px;
-            border-radius: 5px;
-            border-bottom: 1px solid;
-            border-right: none;
-            border-left: 1px solid;
-            border-top: none;
-            font-family: "Roboto Mono";
-        }
+input[type=checkbox] {
+    margin-right: 8px;
+    margin-left: 8px;
+    cursor: pointer;
+}
 
-        #right-side-form input[type=button],
-        input[type=submit] {
-            font-family: "Roboto Mono";
-        }
+/* #right-area {
+    margin-bottom: 10px;
+} */
 
-        .radio-btn-grp {
-            display: flex;
-            justify-content: space-between;
-        }
+#nav-section {
+    border: 1px solid;
+    /* position: fixed; */
+    /* bottom: 0; */
+    /* width: calc(100vw - 10px); */
+    width: calc(100vw - 10px);
+    /* height: calc(10vh - 10px); */
+    height: calc(10vh - 15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        #add-task-submit-btn {
-            width: 100%;
-            height: 30px;  
-        }
+#left-area, 
+#right-area,
+#nav-section {
+    border-radius: 15px;
+}
 
-        #nav-section {
-            /* margin-bottom: 10px;
-            margin-right: 10px; */
-        }
+#adding-list {
+    border: 1px solid;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    padding: 15px;
+}
 
-        .nav-links {
-            /* height: 50%; */
-            /* border: 1px solid;    */
-            display: grid;
-            align-items: center;
-            margin-right: 40px;
-            margin-left: 40px;
-        }
+#right-side-form {
+    width: 100%;
+    line-height: 30px;
+    position: relative;
+}
 
-        .nav-links img {
-            scale: 0.8;     
-        }
+#right-side-form input[type=text] {
+    width: 100%;
+    height: 30px;
+    padding: 3px 5px;
+    border-radius: 5px;
+    border-bottom: 1px solid;
+    border-right: none;
+    border-left: 1px solid;
+    border-top: none;
+    font-family: "Roboto Mono";
+}
+
+#right-side-form input[type=button],
+input[type=submit] {
+    font-family: "Roboto Mono";
+}
+
+.radio-btn-grp {
+    display: flex;
+    justify-content: space-between;
+}
+
+#add-task-submit-btn {
+    width: 100%;
+    height: 30px;  
+}
+
+.nav-links {
+    /* height: 50%; */
+    /* border: 1px solid;    */
+    display: grid;
+    align-items: center;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+.nav-links img {
+    scale: 0.8;     
+}
     </style>
 </head>
+
 <body>
     <div id="logout-page">
         <div id="logout-box">
@@ -364,6 +401,7 @@
                 file_put_contents($dir . "/col1.txt", "");
                 file_put_contents($dir . "/col2.txt", "");
                 file_put_contents($dir . "/col3.txt", "");
+                file_put_contents($dir. "/headings_to_remove.txt", "");
                 load_the_list();
             } else {
                 // echo "Directory already exists";
@@ -380,7 +418,7 @@
                     <!-- <input type="button" value="Add Task" onclick="addItem();" id="task1" style="margin-top: 10px;"> -->
                     <br><br>
                     Heading (optional): <br>
-                    <input type="text" name="opHeading" id="heading" placeholder="Ex: Business" value="<?php echo $optionalHeading; ?>"> <br><br>
+                    <input type="text" name="opHeading" id="heading" placeholder="Ex: Business" value="<?php echo $optionalHeading; ?>" required> <br><br>
                     Add to column: <br>
 
                     <div class="radio-btn-grp">
@@ -431,11 +469,9 @@
         <!-- <a href="" class="">Contact</a> -->
     </div>
 
-    <?php
-        
-    ?>
-
     <script>
+        let theArrayOfH4 = Array.from(document.getElementsByClassName("to-do-list-heading"));
+
         let logoutPage = document.getElementById("logout-page");
 
         //checking for logout confirmation and doing things accordingly
@@ -452,6 +488,85 @@
         const logOutPopUpBox = () => {
             logoutPage.style.visibility = "visible";
             logoutPage.style.zIndex = 1000;
+        }
+
+        function checkingInArray(theHeading, columnId) {
+
+            // console.log("~~~~Called checkingInArray()~~~~~");
+
+            let count = 0;
+
+            console.log(theArrayOfH4);
+
+            for (let i = 0; i < theArrayOfH4.length; i++) {
+                // console.log("~~~~~INSIDE FOREACH~~~~~");
+                // console.log("~~~~~~~~" + theArrayOfH4[i].innerHTML + " ");
+                // console.log(theHeading + "\n");
+                if (theArrayOfH4[i].innerHTML == theHeading && theArrayOfH4[i].nextElementSibling.id == columnId) {
+                    // console.log("~~~~~INSIDE IF~~~~~");
+                    // alert("Found at " + count);
+                    return i;
+                } 
+                count++;
+            }
+
+            // return count;
+        }
+
+        //this function is for removing a list group (heading + items under it) from the screen
+        const removeThisListGrp = (curElementReference) => {
+            let theHeading = curElementReference.previousElementSibling.innerHTML;
+
+            console.log("Clicked this element: " + theHeading);
+
+            let theMainEle = curElementReference.parentElement;
+
+            if (theMainEle.previousElementSibling != null && theMainEle.previousElementSibling.tagName == "HR") {
+                theMainEle.previousElementSibling.remove();
+            }
+
+            while (true) {
+                let prevEle = theMainEle;
+                
+                try {
+                    theMainEle = theMainEle.nextElementSibling;
+                } catch (err) {
+                    console.log("Exception encountered");
+                }
+
+                prevEle.remove();
+
+                if (theMainEle == null || theMainEle.tagName == "DIV") {
+                    break;
+                }
+            }
+
+            let currentElementId = curElementReference.id;
+            // let vari = columnId.previousElementSibling;
+            console.log("YES");
+            console.log(currentElementId);
+            // console.log(columnId.parentElement);
+            // console.log(vari);
+            console.log("NO");
+
+            // $.post("insert_into_file.php", {headingName: theHeading});
+            
+            // if (currentElementId == "one") {
+            //     let theIndex = checkingInArray(theHeading, currentElementId);
+            //     alert("INDEX: " + theIndex);
+            // } else if (currentElementId == "two") {
+            //     let theIndex = checkingInArray(theHeading, currentElementId);
+            //     alert("INDEX: " + theIndex);
+            // } else {
+            //     let theIndex = checkingInArray(theHeading, currentElementId);
+            //     alert("INDEX: " + theIndex);
+            // }
+
+            theArrayOfH4 = Array.from(document.getElementsByClassName("to-do-list-heading"));
+
+            // console.log(columnId);
+
+            // console.log("WIth column id = " + columnId);
         }
     </script>
 </body>

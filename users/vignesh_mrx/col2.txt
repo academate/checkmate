@@ -1,16 +1,7 @@
-heading: Heading checking
-item: Checking
-item: Checking 2.0
-heading: Freedom
-item: Left one works?
-item: Are you sure?
-heading: Freedom
-item: Left one works?
-item: Are you sure?
-heading: Freedom
-item: Left one works?
-item: Are you sure?
-heading: Freedom
-item: Left one works?
-item: Are you sure?
-item: Done
+heading: TEST 2
+item: again 
+item: yes, super it is
+item: Testing
+item: Middle
+heading: TEST 1
+item: checking again

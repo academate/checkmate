@@ -139,7 +139,6 @@
 
         if(isset($_POST["sign_up"])) {
             include "connect.php";
-            // include "calling_js_fun.php";
 
             //usernmae mistake checking
             $contains_dollar = str_contains($username, "$");
@@ -182,23 +181,7 @@
             } else {
                 echo "<script>callErr(3)</script>";
             }
-
-            /* Write code for username mistake function */
         }
     ?>
-
-    
-
-    <!-- <script>
-        let signupBtn = document.getElementById("signupBtn");
-
-        signupBtn.addEventListener("submit", e => {
-            e.preventDefault();
-        });
-    </script> -->
-
-    
-
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 </body>
 </html>
