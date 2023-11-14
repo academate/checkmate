@@ -48,6 +48,12 @@
             // let headingsArray = Array.from
         }
 
+        const addHr = (idOfColumn) => {
+            let columnId = document.getElementById(idOfColumn);
+
+            columnId.innerHTML += "<hr>";
+        }
+
         //function to input list items to the screen
         const inputListItemsToScreen = (theItem, idOfColumn) => {
             let columnId = document.getElementById(idOfColumn);
@@ -102,6 +108,12 @@
             colOne.firstElementChild.remove();
             colTwo.firstElementChild.remove();
             colThree.firstElementChild.remove();
+        }
+
+        const populateUsersCheckmateHeading = (userFullName) => {
+            let usersCheckmateHeadingArea = document.getElementById("users-checkmate-heading");
+
+            usersCheckmateHeadingArea.innerHTML = "<div>" + userFullName + "'s <span class='checkmate'>Checkmate</span></div>";
         }
     </script>
     <!-- <link rel="stylesheet" href="style.css"> -->
@@ -166,6 +178,10 @@ body {
     visibility: hidden;
 }
 
+.checkmate {
+    font-family: 'Dancing Script', cursive;
+}
+
 #logout-box {
     border: 3px solid;
     border-radius: 10px;
@@ -188,8 +204,21 @@ body {
     border: 1px solid;
     margin-right: 10px;
     margin-bottom: 10px;
+}
+
+#users-checkmate-heading {
+    height: 10%;
+    border: 2px solid red;
+    display: grid;
+    place-items: center;
+    font-size: 30px;
+}
+
+#left-content-area {
     padding: 25px 5px;
     display: flex;
+    height: 90%;
+    /* overflow: auto; */
 }
 
 #column-one,
@@ -377,6 +406,8 @@ input[type=submit] {
     </div>
     <section id="main-content-area">
         <div id="left-area">
+            <div id="users-checkmate-heading"></div>
+            <div id="left-content-area">
             <div id="column-one">
                 <!-- Nothing added yet -->
             </div>
@@ -386,9 +417,12 @@ input[type=submit] {
             <div id="column-three">
                 <!-- Nothing added yet -->
             </div>
+            </div>
         </div>
         <div id="right-area">
             <?php
+            include_once("connect.php");
+
             $user = $_REQUEST["id"];
             $user = trim($user, "'");
             $dir = "users/" . $user;
@@ -401,7 +435,6 @@ input[type=submit] {
                 file_put_contents($dir . "/col1.txt", "");
                 file_put_contents($dir . "/col2.txt", "");
                 file_put_contents($dir . "/col3.txt", "");
-                file_put_contents($dir. "/headings_to_remove.txt", "");
                 load_the_list();
             } else {
                 // echo "Directory already exists";
@@ -522,7 +555,11 @@ input[type=submit] {
             let theMainEle = curElementReference.parentElement;
 
             if (theMainEle.previousElementSibling != null && theMainEle.previousElementSibling.tagName == "HR") {
-                theMainEle.previousElementSibling.remove();
+                
+                if (theMainEle.previousElementSibling.previousElementSibling == null) {
+                    theMainEle.previousElementSibling.remove();
+                }
+
             }
 
             while (true) {

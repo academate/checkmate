@@ -5,6 +5,21 @@ $col_two_headings = array();
 $col_three_headings = array();
 $heading_to_remove_array = array();
 
+$sql_query = "select first_name, last_name from user_details where username='$user'";
+
+$result_of_query = mysqli_query($con, $sql_query);
+
+$row_of_result_query = mysqli_fetch_assoc($result_of_query);
+
+$first_name_of_user = $row_of_result_query["first_name"];
+$last_name_of_user = $row_of_result_query["last_name"];
+
+$full_name_of_user = ucfirst($first_name_of_user) . " " . ucfirst($last_name_of_user);
+
+// echo "FULL NAME = $full_name_of_user";
+
+echo '<script>populateUsersCheckmateHeading("' . $full_name_of_user . '");</script>';
+
 function load_the_list() {
     GLOBAL $dir;
 
@@ -56,6 +71,8 @@ function load_the_list() {
         // echo '<script>inputTasksToScreen("' . $line . '", "column-one");</script>';
     }
 
+    echo '<script>addHr("column-one");</script>';
+
     //reading middle_file line by line
     while ($line = fgets($fptr_middle)) {
         // echo $line;
@@ -72,6 +89,8 @@ function load_the_list() {
         
         // echo '<script>inputTasksToScreen("' . $line . '", "column-two");</script>';
     }
+
+    echo '<script>addHr("column-two");</script>';
 
     //reading right_file line by line
     //Making some big changes here ------------------------------------------------------------------------------------------------------------------------------
@@ -90,6 +109,8 @@ function load_the_list() {
         
         // echo '<script>inputTasksToScreen("' . $line . '", "column-three");</script>';
     }
+
+    echo '<script>addHr("column-three");</script>';
 
     //Making some big changes here ------------------------------------------------------------------------------------------------------------------------------
 

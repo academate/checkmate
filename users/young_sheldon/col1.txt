@@ -1,6 +1,3 @@
-heading: SCIENCE
-item: Partical 
-item: Accelerator
-heading: TEACHING
-item: Teach
-item: Georgie
+heading: HELLO WORLD
+item: CHECHKING 
+item: LEFT SIDE
