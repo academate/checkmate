@@ -1,3 +1,5 @@
-heading: HELLO WORLD
-item: CHECHKING 
-item: LEFT SIDE
+heading: ENTERTAINMENT
+item: Testing
+item: Are you sure?
+item: Testing
+item: Are you sure?

@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup</title>
-    <link rel="stylesheet" href="signup.css">
+    <!-- <link rel="stylesheet" href="signup.css"> -->
+    <style><?php include 'colors.css'; ?></style>
+    <style><?php include 'signup.css'; ?></style>
     <script defer>
         function callErr(errorNo) {
             console.log("Call error has been called with " + errorNo);
@@ -69,8 +71,8 @@
     <div class="container">
         <div class="left-area">
             <div class="greeting-area">
-                Welcome to <br>
-                <span class="checkmate">CheckMate</span>. <br>
+                Welcome to 
+                <span class="checkmate">CheckMate</span>.<br>
                 Your ultimate productivity assistant.
             </div>
         </div>
@@ -135,7 +137,6 @@
     </div>
 
     <?php
-        echo "It reached inside php";
 
         if(isset($_POST["sign_up"])) {
             include "connect.php";

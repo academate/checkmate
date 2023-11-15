@@ -1,5 +1,0 @@
-heading: CHORES
-item: Help Mom
-item: Do dishes
-heading: SOCIALIZING
-item: Call Paige

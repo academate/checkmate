@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="signup.css">
+    <!-- <link rel="stylesheet" href="signup.css"> -->
+    <!-- <link rel="stylesheet" href="colors.css"> -->
+    <style><?php include 'colors.css'; ?></style>
+    <style><?php include 'signup.css'; ?></style>
+
+
     <script defer>
         window.history.forward(); 
         function noBack() { 
@@ -83,7 +88,7 @@
         <div class="left-area">
             <div class="greeting-area">
                 Welcome back to <br>
-                <spanc class="checkmate">CheckMate</span>.
+                <span class="checkmate">CheckMate</span>!
             </div>
         </div>
         <div class="right-area">
@@ -141,7 +146,7 @@
 
             try {
                 $row = mysqli_fetch_assoc($username_res);
-                echo "Row: " . var_dump($row);
+                // echo "Row: " . var_dump($row);
                 if ($row == NULL) {
                     die("<script>callErr(1);</script>");
                 } else {

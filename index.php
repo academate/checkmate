@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="stylesheet" href="colors.css">
+    <style><?php include 'styles.css'; ?></style>
     <script>
         window.history.forward(); 
         function noBack() { 
@@ -113,295 +114,20 @@
         const populateUsersCheckmateHeading = (userFullName) => {
             let usersCheckmateHeadingArea = document.getElementById("users-checkmate-heading");
 
-            usersCheckmateHeadingArea.innerHTML = "<div>" + userFullName + "'s <span class='checkmate'>Checkmate</span></div>";
+            usersCheckmateHeadingArea.innerHTML = "<div>" + userFullName + "'s <span class='checkmate'>CheckMate</span></div>";
         }
     </script>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-
-    <style>
-        /* * {
-    margin: 0;
-}
-
-#main-content-area {
-    display: flex;
-    justify-content: center;
-    height: 80vh;
-    border: 1px solid;
-}
-
-#left-area {
-    width: 70vw;
-    border: 1px solid;
-}
-
-#right-area {
-    width: 30vw;
-    border: 1px solid;
-}
-
-nav {
-    border: 1px solid;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 20vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap');
-
-* {
-    margin: 0;
-    box-sizing: border-box;
-}
-
-body {
-    padding: 5px;
-    font-family: "Roboto Mono";
-}
-
-#logout-page {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1000;
-    /* background: white; */
-    /* opacity: 0.7; */
-    display: grid;
-    place-items: center;
-    visibility: hidden;
-}
-
-.checkmate {
-    font-family: 'Dancing Script', cursive;
-}
-
-#logout-box {
-    border: 3px solid;
-    border-radius: 10px;
-    width: 300px;
-    padding: 20px;
-    background: red;
-    opacity: 1;
-}
-
-#main-content-area {
-    display: flex;
-    justify-content: center;
-    height: 90vh;
-    /* margin-bottom: 10px; */
-    /* border: 1px solid; */
-}
-
-#left-area {
-    width: 75vw;
-    border: 1px solid;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-#users-checkmate-heading {
-    height: 10%;
-    border: 2px solid red;
-    display: grid;
-    place-items: center;
-    font-size: 30px;
-}
-
-#left-content-area {
-    padding: 25px 5px;
-    display: flex;
-    height: 90%;
-    /* overflow: auto; */
-}
-
-#column-one,
-#column-two,
-#column-three {
-    flex: 1;
-    padding: 10px 15px;
-    overflow: auto;
-}
-
-#column-one::-webkit-scrollbar,
-#column-two::-webkit-scrollbar,
-#column-three::-webkit-scrollbar {
-    display: none;
-}
-
-hr {
-    margin: 10px 0px;
-}
-
-#column-two,
-#column-one {
-    border-right: 5px solid;  
-}
-
-/* #left-area {
-    margin-right: 10px;
-    margin-bottom: 10px;
-} */
-
-.heading-grp {
-    position: relative;
-    padding: 5px;
-    /* border-top: 2px solid;
-    border-right: 2px solid;
-    border-left: 2px solid; */
-    /* border-top-left-radius: 10px;
-    border-top-right-radius: 10px; */
-    margin-top: 10px;
-    /* border: 1px solid; */
-}
-
-.cross-div {
-    /* visibility: hidden; */
-    cursor: pointer;
-    /* opacity: 0; */
-    /* scale: 1.05; */
-}
-
-.cross-div:hover {
-    /* visibility: visible; */
-    opacity: 1;
-}
-
-.cross-bar-one, 
-.cross-bar-two {
-    background: green;
-    min-width: 18px;
-    height: 2px;
-    display: inline-block;
-    position: absolute;
-    right: 10px;
-    top: 15px;
-    border-radius: 15px;
-}
-
-.cross-bar-one {
-    transform: rotate(45deg);
-}
-
-.cross-bar-two {
-    transform: rotate(-45deg);
-}
-
-#right-area {
-    width: 25vw;
-    border: 1px solid;
-    margin-bottom: 10px;
-}
-
-.heading-underline {
-    width: 30%;
-    height: 5px;
-    border-radius: 5px;
-    background: red;
-    display: block;
-    /* margin-left: 10px;
-    margin-bottom: 5px; */
-    margin: 0px auto 10px auto;
-}
-
-input[type=checkbox] {
-    margin-right: 8px;
-    margin-left: 8px;
-    cursor: pointer;
-}
-
-/* #right-area {
-    margin-bottom: 10px;
-} */
-
-#nav-section {
-    border: 1px solid;
-    /* position: fixed; */
-    /* bottom: 0; */
-    /* width: calc(100vw - 10px); */
-    width: calc(100vw - 10px);
-    /* height: calc(10vh - 10px); */
-    height: calc(10vh - 15px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#left-area, 
-#right-area,
-#nav-section {
-    border-radius: 15px;
-}
-
-#adding-list {
-    border: 1px solid;
-    height: 100%;
-    width: 100%;
-    display: grid;
-    place-items: center;
-    padding: 15px;
-}
-
-#right-side-form {
-    width: 100%;
-    line-height: 30px;
-    position: relative;
-}
-
-#right-side-form input[type=text] {
-    width: 100%;
-    height: 30px;
-    padding: 3px 5px;
-    border-radius: 5px;
-    border-bottom: 1px solid;
-    border-right: none;
-    border-left: 1px solid;
-    border-top: none;
-    font-family: "Roboto Mono";
-}
-
-#right-side-form input[type=button],
-input[type=submit] {
-    font-family: "Roboto Mono";
-}
-
-.radio-btn-grp {
-    display: flex;
-    justify-content: space-between;
-}
-
-#add-task-submit-btn {
-    width: 100%;
-    height: 30px;  
-}
-
-.nav-links {
-    /* height: 50%; */
-    /* border: 1px solid;    */
-    display: grid;
-    align-items: center;
-    margin-right: 40px;
-    margin-left: 40px;
-}
-
-.nav-links img {
-    scale: 0.8;     
-}
-    </style>
 </head>
 
 <body>
+    <div id="logout-background-page"></div>
     <div id="logout-page">
         <div id="logout-box">
             <p>Log out from Checkmate?</p> <br>
-            <input type="button" value="Logout" onclick="logOutConfirmation(true);">
-            <input type="button" value="Cancel" onclick="logOutConfirmation(false);">
+            <div class="flex-line">
+                <input type="button" value="LOGOUT" onclick="logOutConfirmation(true);">
+                <input type="button" value="CANCEL" onclick="logOutConfirmation(false);">
+            </div>
         </div>
     </div>
     <section id="main-content-area">
@@ -470,7 +196,7 @@ input[type=submit] {
 
                     <br>
 
-                    <input type="submit" value="Add" name="add_tasks" id="add-task-submit-btn" > <!-- onclick="addItem();" -->
+                    <input type="submit" value="ADD" name="add_tasks" id="add-task-submit-btn" > <!-- onclick="addItem();" -->
 
                     <!-- <br> -->
 
@@ -480,10 +206,6 @@ input[type=submit] {
         </div>
     </section>
 
-    <?php
-    
-
-    ?>
     <div id="nav-section">
         <!-- <a href="" class="">Home</a> -->
         <a href="#" class="nav-links">
@@ -503,24 +225,27 @@ input[type=submit] {
     </div>
 
     <script>
-        let theArrayOfH4 = Array.from(document.getElementsByClassName("to-do-list-heading"));
+        // let theArrayOfH4 = Array.from(document.getElementsByClassName("to-do-list-heading"));
 
         let logoutPage = document.getElementById("logout-page");
+        let logoutBackPage = document.getElementById("logout-background-page");
 
         //checking for logout confirmation and doing things accordingly
         const logOutConfirmation = (boolVal) => {
-            if (boolVal == true) {
+            if (boolVal) {
                 window.location.replace("login.php");
             } else {
-                logoutPage.style.visibility = "hidden";
+                logoutPage.style.visibility = logoutBackPage.style.visibility = "hidden";
                 logoutPage.style.zIndex = -1000;
+                logoutBackPage.style.zIndex = -500;
             }
         }
 
         //showing logout confirmation box
         const logOutPopUpBox = () => {
-            logoutPage.style.visibility = "visible";
+            logoutPage.style.visibility = logoutBackPage.style.visibility = "visible";
             logoutPage.style.zIndex = 1000;
+            logoutBackPage.style.zIndex = 500;
         }
 
         function checkingInArray(theHeading, columnId) {
