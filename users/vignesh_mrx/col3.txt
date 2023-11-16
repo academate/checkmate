@@ -1,7 +1,0 @@
-heading: TEST 3
-item: Testing
-item: Right SIDE
-heading: CHECKINGGGG
-item: CHECK
-item: CHECK
-item: CHECK

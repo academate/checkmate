@@ -185,15 +185,16 @@
             ?>
             <div id="adding-list">
                 <form action="" method="post" id="right-side-form">
-                    Task: <br>
+                    Heading ~ <br>
+                    <input type="text" name="opHeading" id="heading" placeholder="Ex: Business" value="<?php echo $optionalHeading; ?>" required> <br><br>
+                    Task ~ <br>
                     <input type="text" name="taskOne" id="taskOne" placeholder="Ex: Team meeting at 20:00" style="margin-bottom: 15px;" value="<?php echo $taskOne; ?>" required> <br>
 
                     <input type="text" name="taskTwo" id="taskTwo" placeholder="Ex: Meet boss for dinner" value="<?php echo $taskTwo; ?>">
                     <!-- <input type="button" value="Add Task" onclick="addItem();" id="task1" style="margin-top: 10px;"> -->
                     <br><br>
-                    Heading (optional): <br>
-                    <input type="text" name="opHeading" id="heading" placeholder="Ex: Business" value="<?php echo $optionalHeading; ?>" required> <br><br>
-                    Add to column: <br>
+
+                    Add To Column ~ <br>
 
                     <div class="radio-btn-grp">
                     <label for="col1">

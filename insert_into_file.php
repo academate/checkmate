@@ -27,6 +27,7 @@ function load_the_list() {
     // GLOBAL $left;
     // GLOBAL $middle;
     // GLOBAL $right;
+    echo "<script>console.log('Reached line 30');</script>";
 
     GLOBAL $col_one_headings;
     GLOBAL $col_two_headings;
@@ -40,6 +41,8 @@ function load_the_list() {
     $middle = $dir . "/col2.txt"; 
     $right = $dir . "/col3.txt";
 
+    echo "<script>console.log('Reached line 44');</script>";
+
     // $left = $dir . "/col1.txt"; 
     // $middle = $dir . "/col2.txt"; 
     // $right = $dir . "/col3.txt";
@@ -48,6 +51,8 @@ function load_the_list() {
     $fptr_left = fopen($left, "r");
     $fptr_middle = fopen($middle, "r");
     $fptr_right = fopen($right, "r");
+
+    echo "<script>console.log('Reached line 55');</script>";
 
     //reading the content of each file
     // $left_content = fread($fptr_left, filesize($left));
@@ -58,6 +63,9 @@ function load_the_list() {
     while ($line = fgets($fptr_left)) {
         // echo $line;
         $line = rtrim($line, "\n");
+
+        echo "<script>console.log('Reached line 67');</script>";
+        echo "<script>console.log('~~~~~~~" . $line . "~~~~~~');</script>";
 
         //inserting the headings of column 1 to an array
         if (str_contains($line, "heading: ")) {

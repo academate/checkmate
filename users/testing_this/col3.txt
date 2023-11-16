@@ -1,0 +1,18 @@
+heading: CHECK ONE
+item: Yolo
+item: hh
+item: Yolo
+item: hh
+item: Yolo
+item: Are you sure?
+heading: ENTERTAINMENT
+item: Yolo
+item: Are you sure?
+heading: LEFT ONE CHECKING
+item: Yolo
+item: hh
+item: Yolo
+item: Yes, it works!!
+heading: TESTING
+item: Yolo
+item: Are you sure?
