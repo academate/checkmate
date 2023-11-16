@@ -102,13 +102,25 @@
         }
 
         const removeFirstHr = () => {
-            let colOne = document.getElementById("column-one");
-            let colTwo = document.getElementById("column-two");
-            let colThree = document.getElementById("column-three");
+            let colOne = document.getElementById("column-one").firstElementChild;
+            let colTwo = document.getElementById("column-two").firstElementChild;
+            let colThree = document.getElementById("column-three").firstElementChild;
 
-            colOne.firstElementChild.remove();
-            colTwo.firstElementChild.remove();
-            colThree.firstElementChild.remove();
+            if (colOne.tagName == "HR") {
+                colOne.remove();
+            }
+
+            if (colTwo.tagName == "HR") {
+                colTwo.remove();
+            }
+
+            if (colThree.tagName == "HR") {
+                colThree.remove();
+            }
+
+            // colOne.firstElementChild.remove();
+            // colTwo.firstElementChild.remove();
+            // colThree.firstElementChild.remove();
         }
 
         const populateUsersCheckmateHeading = (userFullName) => {
@@ -146,6 +158,9 @@
             </div>
         </div>
         <div id="right-area">
+            <div id="add-task-heading">
+                ADD TASK
+            </div>
             <?php
             include_once("connect.php");
 
