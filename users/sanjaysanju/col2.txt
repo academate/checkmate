@@ -1,3 +1,0 @@
-heading: WORKING HEADING
-item: Yolo
-item: Are you sure?

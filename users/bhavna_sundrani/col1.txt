@@ -1,3 +1,0 @@
-heading: GOOD AFTERNOON TEACHER
-item: Jai shree krishna
-item: Sayonara

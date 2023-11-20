@@ -1,3 +1,0 @@
-heading: FRIENDS
-item: Hello Anju
-item: Helo Otaku

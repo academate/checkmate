@@ -16,56 +16,31 @@ $last_name_of_user = $row_of_result_query["last_name"];
 
 $full_name_of_user = ucfirst($first_name_of_user) . " " . ucfirst($last_name_of_user);
 
-// echo "FULL NAME = $full_name_of_user";
-
 echo '<script>populateUsersCheckmateHeading("' . $full_name_of_user . '");</script>';
+
+echo '<script>putNameAndUsername("' . $full_name_of_user . '", "' . $user . '");</script>';
 
 function load_the_list() {
     GLOBAL $dir;
-
-    //file names
-    // GLOBAL $left;
-    // GLOBAL $middle;
-    // GLOBAL $right;
-    echo "<script>console.log('Reached line 30');</script>";
 
     GLOBAL $col_one_headings;
     GLOBAL $col_two_headings;
     GLOBAL $col_three_headings;
 
-    // echo sizeof($col_one_headings);
-    // echo sizeof($col_two_headings);
-    // echo sizeof($col_three_headings);
-
     $left = $dir . "/col1.txt"; 
     $middle = $dir . "/col2.txt"; 
     $right = $dir . "/col3.txt";
-
-    echo "<script>console.log('Reached line 44');</script>";
-
-    // $left = $dir . "/col1.txt"; 
-    // $middle = $dir . "/col2.txt"; 
-    // $right = $dir . "/col3.txt";
 
     //creating file pointer for each file
     $fptr_left = fopen($left, "r");
     $fptr_middle = fopen($middle, "r");
     $fptr_right = fopen($right, "r");
 
-    echo "<script>console.log('Reached line 55');</script>";
-
-    //reading the content of each file
-    // $left_content = fread($fptr_left, filesize($left));
-
     $left_read_heading = $middle_read_heading = $right_read_heading = 0;
 
     //reading left_file line by line
     while ($line = fgets($fptr_left)) {
-        // echo $line;
         $line = rtrim($line, "\n");
-
-        echo "<script>console.log('Reached line 67');</script>";
-        echo "<script>console.log('~~~~~~~" . $line . "~~~~~~');</script>";
 
         //inserting the headings of column 1 to an array
         if (str_contains($line, "heading: ")) {
@@ -75,15 +50,12 @@ function load_the_list() {
         } else {
             echo '<script>inputListItemsToScreen("' . substr($line, 6, strlen($line)) . '", "column-one");</script>';
         }
-        
-        // echo '<script>inputTasksToScreen("' . $line . '", "column-one");</script>';
     }
 
     echo '<script>addHr("column-one");</script>';
 
     //reading middle_file line by line
     while ($line = fgets($fptr_middle)) {
-        // echo $line;
         $line = rtrim($line, "\n");
 
         //inserting the headings of column 2 to an array
@@ -94,14 +66,10 @@ function load_the_list() {
         } else {
             echo '<script>inputListItemsToScreen("' . substr($line, 6, strlen($line)) . '", "column-two");</script>';
         }
-        
-        // echo '<script>inputTasksToScreen("' . $line . '", "column-two");</script>';
     }
 
     echo '<script>addHr("column-two");</script>';
-
-    //reading right_file line by line
-    //Making some big changes here ------------------------------------------------------------------------------------------------------------------------------
+    
     while ($line = fgets($fptr_right)) {
         // echo $line;
         $line = rtrim($line, "\n");
@@ -114,36 +82,13 @@ function load_the_list() {
         } else {
             echo '<script>inputListItemsToScreen("' . substr($line, 6, strlen($line)) . '", "column-three");</script>';
         }
-        
-        // echo '<script>inputTasksToScreen("' . $line . '", "column-three");</script>';
     }
 
     echo '<script>addHr("column-three");</script>';
 
-    //Making some big changes here ------------------------------------------------------------------------------------------------------------------------------
-
     fclose($fptr_left);
     fclose($fptr_middle);
     fclose($fptr_right);
-
-    // echo var_dump($col_one_headings);
-    // echo "<br><br>" . var_dump($col_two_headings);
-    // echo "<br><br>" . var_dump($col_three_headings);
-
-    // foreach($col_one_headings as $ele) {
-    //     echo $ele;
-    // }
-
-    // foreach($col_two_headings as $ele) {
-    //     echo $ele;
-    // }
-    
-    // foreach($col_three_headings as $ele) {
-    //     echo $ele;
-    // }
-
-    // echo var_dump($col_one_headings);
-    // echo var_dump($col_two_headings);
 
     echo "<script>removeFirstHr();</script>";
 }
@@ -152,10 +97,6 @@ $taskOne = $taskTwo = $optionalHeading = $radio_checked = "";
 
 if (isset($_POST["add_tasks"])) {
     $taskOne = $_POST["taskOne"];
-
-    // if (isset($_POST["taskTwo"])) {
-    //     $taskTwo = $_POST["taskTwo"];
-    // }
 
     try {
         $taskTwo = $_POST["taskTwo"];
@@ -167,11 +108,6 @@ if (isset($_POST["add_tasks"])) {
 
     $radio_checked = $_POST["cols"];
 
-    // echo $taskOne;
-    // echo "<br>" . $taskTwo;
-    // echo "<br>" . $optionalHeading;
-    // echo "<br>" . $radio_checked;
-
     insert_into_file($taskOne, $taskTwo, $optionalHeading, $radio_checked);
 
     //after doing writing task
@@ -180,12 +116,8 @@ if (isset($_POST["add_tasks"])) {
 
 function insert_into_file($taskOne, $taskTwo, $optionalHeading, $file_name) {
     GLOBAL $dir;
-    // echo "Inside insert_into_file fnciton successfully";
-
-    // echo "<br> $dir";
 
     $file = $dir . "/" . $file_name . ".txt";
-    // echo "<br>" . $file;
 
     $file_prt = fopen($file, "r");
 
@@ -198,10 +130,8 @@ function insert_into_file($taskOne, $taskTwo, $optionalHeading, $file_name) {
         if (str_contains($line, "heading: ")) {
             $line = rtrim($line, "\n");
             $heading_of_matched_line = substr($line, 9);
-            // echo "~~~~~~~~~~~~~HEADING: " . $heading_of_matched_line;
 
             if ($heading_of_matched_line == $optionalHeading) {
-                // echo "~~~~~~OPTIONAHL heading match";
                 $file_content = $file_content . $line . "\n";
 
                 $file_content = $file_content . "item: " . $taskOne . "\n";
@@ -222,12 +152,6 @@ function insert_into_file($taskOne, $taskTwo, $optionalHeading, $file_name) {
     fclose($file_prt);
 
     if ($flag == 0) {
-        // $file_content = $file_content . $optionalHeading . "\n" . $taskOne . "\n";
-
-        // if ($taskTwo != "") {
-        //     $file_content = $file_content . $taskTwo . "\n";
-        // }
-
         $file_ptr = fopen($file, "a");
 
         fwrite($file_ptr, "heading: " . $optionalHeading . "\n");
@@ -246,112 +170,7 @@ function insert_into_file($taskOne, $taskTwo, $optionalHeading, $file_name) {
 
         fclose($file_ptr);
     }
-
-    // $file_ptr = fopen($file, "a");
-    
-    // fwrite($file_ptr, "heading: " . $optionalHeading . "\n");
-
-    // fwrite($file_ptr, "item: " . $taskOne . "\n");
-
-    // if ($taskTwo != "") {
-    //     fwrite($file_ptr, "item: " . $taskTwo . "\n");
-    // }
-
-    // fclose($file_ptr);
-    // echo "<br><br>Writing to file successful";
 }
-
-// function remove_heading($the_heading_index, $column_id) {
-//     GLOBAL $col_one_headings;
-//     GLOBAL $col_two_headings;
-//     GLOBAL $col_three_headings;
-
-//     GLOBAL $dir;
-
-//     echo "The coludmn id = $column_id <br>";
-
-//     $the_file_name = $dir . "/headings_to_remove.txt";
-//     echo $the_file_name;
-//     $file_pt = fopen($the_file_name, "a");
-
-//     if ($column_id == "column-one") {
-//         echo "INside first if";
-
-//         echo $the_heading_index;
-//         $the_index = substr($the_heading_index, 3, 5);
-//         echo "~~~~INDEXXXX~~~~~~~ $the_index";
-//         echo $the_heading_index;
-
-//         if ((int) $the_heading_index == 1) {
-//             echo "IT IS ONE";
-//         }
-
-//         // fwrite($file_pt, "1" . $the_heading . "\n");
-
-//     } else if ($column_id == "column-two") {
-//         echo "INside if else";
-
-//         if ((int) $the_heading_index == 5) {
-//             echo "IT IS ONE";
-//         }
-
-//         echo $the_heading_index;
-//         echo $the_heading_index;
-//         // fwrite($file_pt, "2$the_heading\n");
-//     } else {
-//         // fwrite($file_pt, "3$the_heading\n");
-//         echo "inside else";
-
-//         echo $the_heading_index;
-//         echo $the_heading_index;
-//     }
-    
-    
-    // else {
-    //     echo "INside else";
-    //     remove_heading_from_array($heading, 3);
-    // }
-
-    // echo var_dump($col_one_headings);
-    // echo var_dump($col_two_headings);
-    // echo var_dump($col_three_headings);
-
-    // fclose($file_pt);
-// }
-
-// function remove_heading_from_array($the_heading_to_remove, $the_array_no) {
-//     GLOBAL $col_one_headings;
-//     GLOBAL $col_two_headings;
-//     GLOBAL $col_three_headings;
-
-//     $heading_to_remove = $the_heading_to_remove;
-//     $array_no = $the_array_no;
-
-//     echo $the_heading_to_remove;
-    // echo "Insdie that called function";
-    // echo "\n";
-    // echo $array_no;
-
-    // foreach ($the_array_name as $ele) {
-        // $the_index = array_search($the_heading_to_remove, $the_array);
-        // unset($the_array[$the_index]);
-        // array_values($the_array);
-    // }
-
-    // echo "<br><br>" . var_dump($the_array);
-    
-
-    // if ($the_array_no == 1) {
-    //     $the_index = array_search($the_heading_to_remove, $the_array);
-    //     // echo $the_index;
-    // }  else if ($the_array_no == 2) {
-    //     $the_index = array_search($the_heading_to_remove, $the_array);
-    //     // echo $the_index;
-    // } else {
-    //     $the_index = array_search($the_heading_to_remove, $the_array);
-    //     // echo $the_index;
-    // }
-// }
 
 ?>
 </html>

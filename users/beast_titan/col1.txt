@@ -1,3 +1,0 @@
-heading: LIFE
-item: Kill Levi
-item: Help Eren

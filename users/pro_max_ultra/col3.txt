@@ -1,3 +1,0 @@
-heading: OTHERS
-item: Fight with Sona
-item: Fight with Darlings

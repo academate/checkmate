@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- <link rel="stylesheet" href="signup.css"> -->
-    <!-- <link rel="stylesheet" href="colors.css"> -->
     <style><?php include 'colors.css'; ?></style>
     <style><?php include 'signup.css'; ?></style>
 
@@ -17,7 +15,6 @@
         }
         
         function callErr(errorNo) {
-            // console.log("Call error has been called");
             switch (errorNo) {
                 case 1: userNotExist();
                         break;
@@ -61,7 +58,6 @@
 
         function checkPwdFun(thePwd, userName) {
             let enteredPwd = document.getElementsByName("pass_one")[0].value;
-            // console.log(enteredPwd);
 
             if (enteredPwd == thePwd) {
                 loginSuccess(userName);
@@ -76,11 +72,8 @@
     <?php
         $username = $passone = "";
         if (isset($_POST["login"])) {
-            // $fname = $_POST["f_name"]; 
-            // $lname = $_POST["l_name"];
             $username = $_POST["username"];
             $passone = $_POST["pass_one"];
-            // $passtwo = $_POST["pass_two"];
         }
     ?>
 
@@ -132,21 +125,16 @@
     </div>
 
     <?php
-        // echo "It reached inside php<br>";
 
         if(isset($_POST["login"])) {
             include "connect.php";
-            // include "calling_js_fun.php";
 
             //username checking
             $username_query = "select * from user_details where username='$username'";
             $username_res = mysqli_query($con, $username_query); //result is an associative array
 
-            // echo "<br><br>" . var_dump($username_res) . "<br><br>";
-
             try {
                 $row = mysqli_fetch_assoc($username_res);
-                // echo "Row: " . var_dump($row);
                 if ($row == NULL) {
                     die("<script>callErr(1);</script>");
                 } else {
@@ -156,11 +144,6 @@
                 }
                 
             } catch (Exception $e) {}
-
-            //password checking
-            // if ($passone != $passtwo) {
-            //     die("<script>callErr(2);</script>");
-            // }
         }
     ?>
 </body>

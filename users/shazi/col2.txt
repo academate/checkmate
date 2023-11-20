@@ -1,5 +1,0 @@
-heading: CHECK ONE
-item: Reading
-item: Editing
-item: Reading
-item: Editing

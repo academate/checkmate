@@ -1,8 +1,0 @@
-heading: ENTERTAINMENT
-item: Testing
-item: Are you sure?
-item: Testing
-item: Are you sure?
-heading: TESTING
-item: Again testing
-item: testing

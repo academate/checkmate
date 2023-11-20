@@ -1,3 +1,0 @@
-heading: HOME STUFFS
-item: Fight with sisters
-item: Talk to Mom and Dad 
